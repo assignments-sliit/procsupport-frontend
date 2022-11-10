@@ -9,6 +9,8 @@ import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
 import Login from "./components/auth/Login";
 import PRListView from "./components/requestor/PRListview";
+import CreatePurchaseOrder from "./components/purchaser/CreatePurchaseOrder";
+import ApprovedPurchaseList from "./components/purchaser/ApprovedPurchaseList";
 
 class App extends Component {
   render() {
