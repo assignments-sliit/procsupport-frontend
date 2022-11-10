@@ -26,6 +26,12 @@ class App extends Component {
             <Routes>
               <Route exact path="/viewPRList" element={<PRListView />} />
             </Routes>
+            <Routes>
+              <Route exact path="/approvedPurchaseList" element={<ApprovedPurchaseList />} />
+            </Routes>
+            <Routes>
+              <Route exact path="/createPurchaseOrder" element={<CreatePurchaseOrder />} />
+            </Routes>
           </div>
           <Footer />
         </div>
