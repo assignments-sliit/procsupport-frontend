@@ -84,11 +84,13 @@ class CreatePurchaseOrder extends Component {
       description: "",
       prid: "",
     });
+
+    getMaterial();
   }
 
   render() {
     return (
-      <div className="dark-overlay landing-inner text-light">
+      <div className="createPurchaseOrder">
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
@@ -190,3 +192,39 @@ class CreatePurchaseOrder extends Component {
 }
 
 export default CreatePurchaseOrder;
+
+const getMaterial = () => {
+  return (
+    <div>
+      <h4>Materials</h4>
+      <h3>Total Material Cost: LKR 23000</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Requirement Id</th>
+            <th>Material Type</th>
+            <th>Date</th>
+            <th>Material Name</th>
+            <th>Quantity</th>
+            <th>Quantity UoM</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* {getMaterial.map(render_getMaterial)}  */}
+          <tr>
+            <td>Requirement Id</td>
+            <td>Material Type</td>
+            <td>Date</td>
+            <td>Material Name</td>
+            <td>Quantity</td>
+            <td>Quantity UoM</td>
+            <td>Unit Price</td>
+            <td>Total Price</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};

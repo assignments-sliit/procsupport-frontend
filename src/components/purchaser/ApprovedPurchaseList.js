@@ -88,7 +88,7 @@ class ApprovedPurchaseList extends Component {
   }
 
   ViewBudget() {
-    return this.state.budget.map(function (currentBudget, i) {
+    return this.state.budget.map(function(currentBudget, i) {
       return <Budget budget={currentBudget} key={i} />;
     });
   }
@@ -106,19 +106,22 @@ class ApprovedPurchaseList extends Component {
 
   render() {
     return (
-      <div className="dark-overlay landing-inner text-light">
+      <div className="approvedPurchaseList">
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
-              <h1 className="display-3 mb-4">Budget</h1>
+              <h1 className="display-3 mb-4">Approved Purchase Request List</h1>
               <hr />
-              <p>{this.ViewBudget}</p>
+              <h3>Budget: LKR 200000 </h3>
+              <h3>{this.ViewBudget}</h3>
             </div>
           </div>
           <hr />
           <div className="row">
             <div className="col-6 col-md-2">
-              <Link className="btn btn-success" to='/createPurchaseOrder'>Create Purchse Order</Link>
+              <Link className="btn btn-success" to="/createPurchaseOrder">
+                Create Purchse Order
+              </Link>
             </div>
           </div>
           <hr />
