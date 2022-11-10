@@ -2,47 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //import axios from "axios";
 
-/*const PR = (props) => {
-  <tr>
-    <td>{props.pr.prid}</td>
-    <td>{props.pr.prName}</td>
-    <td>{props.pr.description}</td>
-    <td>{props.pr.amount}</td>
-    <td>{props.pr.createdOn}</td>
-    <td>{props.pr.updatedOn}</td>
-    <td>{props.pr.status}</td>
-  </tr>;
-};*/
-
-class PRListView extends Component {
-  /*constructor(props){
-    super(props);
-
-    this.state = {
-      prs:[],
-    }
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:500/api/users/<link>')
-    .then(response => {
-      this.setState({
-        prs: response.data
-      })
-    }).catch(function (error){
-      console.log(error);
-    })
-  }
-
-  prList(){
-    return this.state.courses.map(function (currentPRs,i) {
-        return <PR pr={currentPRs} key={i}/>
-    });
-}*/
-
+class AddNewPR extends Component {
   render() {
     return (
-      <div className="viewPRList">
+      <div className="addNewPR">
         <div className="container">
           <div className="row">
             <div className="col-md-128 m-auto">
@@ -84,8 +47,12 @@ class PRListView extends Component {
                 </table>
               </div>
               <br />
-              <Link to="/addNewPR" className="btn btn-md btn-info float-right">
-                <i className="fa-duotone fa-plus"></i> Add Purchase Request
+              <Link
+                to="/viewPRList"
+                className="btn btn-md btn-info float-right"
+              >
+                {" "}
+                View all purchase requests
               </Link>
             </div>
           </div>
@@ -95,4 +62,4 @@ class PRListView extends Component {
   }
 }
 
-export default PRListView;
+export default AddNewPR;

@@ -9,6 +9,7 @@ import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
 import Login from "./components/auth/Login";
 import PRListView from "./components/requestor/PRListview";
+import AddNewPR from "./components/requestor/AddNewPR";
 
 class App extends Component {
   render() {
@@ -25,6 +26,9 @@ class App extends Component {
             </Routes>
             <Routes>
               <Route exact path="/viewPRList" element={<PRListView />} />
+            </Routes>
+            <Routes>
+              <Route exact path="/addNewPR" element={<AddNewPR />} />
             </Routes>
           </div>
           <Footer />
