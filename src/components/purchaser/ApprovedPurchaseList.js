@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { useNavigate, Navigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const ApprovedPurchase = (props) => (
   <tr>
@@ -118,7 +118,7 @@ class ApprovedPurchaseList extends Component {
           <hr />
           <div className="row">
             <div className="col-6 col-md-2">
-              <button className="btn btn-success">Create Purchse Order</button>
+              <Link className="btn btn-success" to='/createPurchaseOrder'>Create Purchse Order</Link>
             </div>
           </div>
           <hr />
