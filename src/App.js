@@ -10,6 +10,8 @@ import Footer from "./components/layout/Footer";
 import Login from "./components/auth/Login";
 import PRListView from "./components/requestor/PRListview";
 import AddNewPR from "./components/requestor/AddNewPR";
+import CreatePurchaseOrder from "./components/purchaser/CreatePurchaseOrder";
+import ApprovedPurchaseList from "./components/purchaser/ApprovedPurchaseList";
 
 class App extends Component {
   render() {
@@ -29,6 +31,12 @@ class App extends Component {
             </Routes>
             <Routes>
               <Route exact path="/addNewPR" element={<AddNewPR />} />
+             </Routes>
+            <Routes>
+              <Route exact path="/approvedPurchaseList" element={<ApprovedPurchaseList />} />
+            </Routes>
+            <Routes>
+              <Route exact path="/createPurchaseOrder" element={<CreatePurchaseOrder />} />
             </Routes>
           </div>
           <Footer />
