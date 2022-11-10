@@ -29,7 +29,7 @@ class Login extends Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
 
     const user = {
@@ -44,15 +44,24 @@ class Login extends Component {
     } else if (!user.username && !user.password) {
       alert("Enter Admin Credentials");
     } else {
-      axios.get("http://localhost:5000/api/users/login", user).then((res) => {
-        if (res.status === 200) {
-          console.log(res.token);
-          alert("Login Success! Welcome, " + this.state.username);
-          this.props.history.push("/"); //after login
-        } else {
-          alert("Login Failed! Please try again!");
-        }
-      });
+      console.log(user);
+      try {
+        await axios
+          .post("http://localhost:5000/api/users/login", {
+            username: this.state.username,
+            password: this.state.password,
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              console.log(res);
+              this.props.history.push("/viewPRList"); //after login
+            } else {
+              alert("Login Failed! Please try again!");
+            }
+          });
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 
