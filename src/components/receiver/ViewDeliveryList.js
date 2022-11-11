@@ -72,7 +72,7 @@ const list = [
   </tr>;
 };*/
 
-class ApproverListView extends Component {
+class ReceiverListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,7 +86,7 @@ class ApproverListView extends Component {
   onMasterCheck(e) {
     let tempList = this.state.List;
     // Check/ UnCheck All Items
-    tempList.map((approver) => (approver.selected = e.target.checked));
+    tempList.map((receiver) => (receiver.selected = e.target.checked));
 
     //Update State
     this.setState({
@@ -149,14 +149,11 @@ class ApproverListView extends Component {
 
   render() {
     return (
-      <div className="viewApproverList">
+      <div className="viewDeliveryList">
         <div className="container">
           <div className="row">
             <div className="col-md-128 m-auto">
-              <h3 className="mb-2 text-center">Available Budget</h3>
-              <p className="text-center h1">50000.00 LKR</p>
-              <br /> <br />
-              <h3 className="mb-2 float-left">All Purchase Requests</h3>
+              <h3 className="mb-2 float-left">Purchase Orders Deliveries</h3>
               <br />
               <br />
               <div className="table-responsive-lg">
@@ -164,49 +161,72 @@ class ApproverListView extends Component {
                   <thead>
                     <tr>
                       <th></th>
-                      <th scope="col">PR ID</th>
-                      <th scope="col">PR Name</th>
-                      <th scope="col">Description</th>
+                      <th scope="col">PO ID</th>
+                      <th scope="col">PO Name</th>
+                      <th scope="col">Supplier</th>
+                      <th scope="col">Address</th>
                       <th scope="col">Amount</th>
                       <th scope="col">Created On</th>
-                      <th scope="col">Updated On</th>
-                      <th scope="col">Status</th>
+                      <th scope="col">Delivery Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.List.map((approver) => (
+                    {this.state.List.map((receiver) => (
                       <tr
-                        key={approver.id}
-                        className={approver.selected ? "selected" : ""}
+                        key={receiver.id}
+                        className={receiver.selected ? "selected" : ""}
                       >
                         <th scope="row">
                           <input
                             type="checkbox"
-                            checked={approver.selected}
+                            checked={receiver.selected}
                             className="form-check-input"
                             id="rowcheck{user.id}"
-                            onChange={(e) => this.onItemCheck(e, approver)}
+                            onChange={(e) => this.onItemCheck(e, receiver)}
                           />
                         </th>
-                        <td>{approver.prid}</td>
-                        <td>{approver.prName}</td>
-                        <td>{approver.description}</td>
-                        <td>{approver.amount}</td>
-                        <td>{approver.createdOn}</td>
-                        <td>{approver.updatedOn}</td>
-                        <td>{approver.status}</td>
+                        <td>{receiver.prid}</td>
+                        <td>{receiver.prName}</td>
+                        <td>{receiver.description}</td>
+                        <td>{receiver.amount}</td>
+                        <td>{receiver.createdOn}</td>
+                        <td>{receiver.updatedOn}</td>
+                        <td>{receiver.status}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                <button
-                  className="btn btn-primary float-right"
-                  onClick={() => this.getSelectedRows()}
+
+                <div
+                  class="btn-toolbar float-right"
+                  role="toolbar"
+                  aria-label="Toolbar with button groups"
                 >
-                  View Purchase Request details
-                </button>
-                <br />
-                <br />
+                  <div
+                    class="btn-group mr-2"
+                    role="group"
+                    aria-label="First group"
+                  >
+                    <button
+                      className="btn btn-success float-right"
+                      onClick={() => this.getSelectedRows()}
+                    >
+                      Create Delivery
+                    </button>
+                  </div>
+                  <div
+                    class="btn-group mr-2"
+                    role="group"
+                    aria-label="Second group"
+                  >
+                    <button
+                      className="btn btn-primary float-right"
+                      onClick={() => this.getSelectedRows()}
+                    >
+                      View Delivery details
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -216,4 +236,4 @@ class ApproverListView extends Component {
   }
 }
 
-export default ApproverListView;
+export default ReceiverListView;

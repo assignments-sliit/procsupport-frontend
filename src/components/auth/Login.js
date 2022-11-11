@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-//import jwt from "jsonwebtoken";
 
 class Login extends Component {
   constructor(props) {
@@ -8,10 +7,8 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      //errors: {},
     };
 
-    //this.onChange = this.onChange.bind(this);
     this.onChangeID = this.onChangeID.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
