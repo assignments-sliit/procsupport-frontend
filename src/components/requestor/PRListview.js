@@ -46,7 +46,8 @@ class PRListView extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-128 m-auto">
-              <h5 className="display-4 text-left">Your Purchase Requests</h5>
+              <h3 className="mb-2 float-left">Your Purchase Requests</h3>
+              <br />
               <br />
               <div className="table-responsive-lg">
                 <table className="table">

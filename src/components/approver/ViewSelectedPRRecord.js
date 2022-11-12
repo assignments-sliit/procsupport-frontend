@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 //var DatePicker = require("react-bootstrap-date-picker");
 
-class AddNewPR extends Component {
+class ViewSelectedPRRecord extends Component {
   render() {
     return (
-      <div className="addNewPR">
+      <div className="viewSelectedPRRecord">
         <div className="container">
           <div className="row">
             <div className="col-md-128 m-auto">
-              <h4 className="mb-2 float-left">Add New Purchase Request</h4>
+              <h4 className="mb-2 float-left">Purchase Request</h4>
               <br />
               <br />
               <br />
@@ -33,7 +33,7 @@ class AddNewPR extends Component {
                       type="text"
                       className="form-control"
                       id="prName"
-                      placeholder="Purchase request name"
+                      readOnly
                     />
                   </div>
                 </div>
@@ -43,7 +43,7 @@ class AddNewPR extends Component {
                     type="text"
                     className="form-control"
                     id="description"
-                    placeholder="Purpose of the purchase"
+                    readOnly
                   />
                 </div>
                 <div className="form-row">
@@ -53,15 +53,26 @@ class AddNewPR extends Component {
                       type="Date"
                       className="form-control"
                       id="createdOn"
-                      placeholder="dd-mm-yyyy"
+                      readOnly
                     />
                   </div>
                   <div className="form-group col-md-4">
                     <label htmlFor="status">Status</label>
-                    <select id="status" class="form-control">
-                      <option>Choose...</option>
-                      <option selected> New </option>
-                    </select>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="status"
+                      readOnly
+                    />
+                  </div>
+                  <div className="form-group col-md-4">
+                    <label htmlFor="amount">Amount</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="amount"
+                      readOnly
+                    />
                   </div>
                 </div>
                 <hr />
@@ -95,55 +106,13 @@ class AddNewPR extends Component {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>
-                          {" "}
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="reqId"
-                            readOnly
-                          />
-                        </td>
-                        <td>
-                          <select id="materialType" class="form-control">
-                            <option>Choose...</option>
-                            <option selected> New </option>
-                          </select>
-                        </td>
-                        <td>
-                          <select id="materialName" class="form-control">
-                            <option>Choose...</option>
-                            <option selected> New </option>
-                          </select>
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            className="form-control"
-                            id="quantity"
-                          />
-                        </td>
-                        <td>
-                          <select id="quantityUOM" class="form-control">
-                            <option>Choose...</option>
-                            <option selected> New </option>
-                          </select>
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="unitPrice"
-                            readOnly
-                          />
-                        </td>
-                        <td>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="TotalPrice"
-                          />
-                        </td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>This is a lengthy description</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
                       </tr>
                     </tbody>
                   </table>
@@ -151,9 +120,19 @@ class AddNewPR extends Component {
               </form>
 
               <br />
-              <Link className="btn btn-md btn-success float-right">
-                {" "}
-                Submit new purchase request
+              <Link to="/login" className="btn btn-md btn-success float-left">
+                Approve purchase request
+              </Link>
+
+              <Link to="/login" className="btn btn-md btn-danger">
+                Reject purchase request
+              </Link>
+
+              <Link
+                to="/viewApproverList"
+                className="btn btn-md btn-info float-right"
+              >
+                View all purchase requests
               </Link>
             </div>
           </div>
@@ -163,4 +142,4 @@ class AddNewPR extends Component {
   }
 }
 
-export default AddNewPR;
+export default ViewSelectedPRRecord;

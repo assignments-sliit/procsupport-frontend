@@ -4,7 +4,6 @@ import axios from "axios";
 class CreatePurchaseOrder extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       poid: "",
       supplier: "",
@@ -12,6 +11,10 @@ class CreatePurchaseOrder extends Component {
       createdon: "",
       description: "",
       prid: "",
+      setInputValue: "",
+      showing: false,
+      setDisable: true,
+      disable: false
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -84,11 +87,10 @@ class CreatePurchaseOrder extends Component {
       description: "",
       prid: "",
     });
-
-    getMaterial();
   }
 
   render() {
+    const { showing, setDisable, disable, setInputValue} = this.state;
     return (
       <div className="createPurchaseOrder">
         <div className="container">
@@ -99,50 +101,59 @@ class CreatePurchaseOrder extends Component {
             </div>
           </div>
           <form onSubmit={this.onSubmit}>
-            <div class="row">
-              <div class="col-6 col-md-2">
-                <button type="submit" class="btn btn-success">
+            <div className="row">
+              <div className="col-6 col-md-2">
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  disabled={disable}
+                  onClick={() => {this.setState({ showing: !showing });this.setState({disable:true})}}
+                >
                   Save Purchse Order
                 </button>
               </div>
-              <div class="col-6 col-md-4">
-                <button type="cancle" class="btn btn-warning">
+              <div className="col-6 col-md-4">
+                <button
+                  type="cancle"
+                  className="btn btn-warning" 
+                  onClick={() => setInputValue("")}
+                >
                   Cancle
                 </button>
               </div>
             </div>
             <hr />
-            <div class="form-row">
-              <div class="form-group col">
+            <div className="form-row">
+              <div className="form-group col">
                 <label for="poid">PO ID</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="poid"
                   value={this.state.poid}
                   onChange={this.onChangepoid}
                   required
                 />
               </div>
-              <div class="form-group col">
+              <div className="form-group col">
                 <label for="supplier">Supplier</label>
                 <select
                   id="supplier"
-                  class="form-control"
+                  className="form-control"
                   value={this.state.supplier}
                   onChange={this.onChangesupplier}
                 >
                   <option selected>Choose...</option>
-                  <option>Supplier 01</option>
-                  <option>Supplier 02</option>
-                  <option>Supplier 03</option>
+                  <option>Holcim</option>
+                  <option>DSI</option>
+                  <option>Kinetic </option>
                 </select>
               </div>
-              <div class="form-group col">
+              <div className="form-group col">
                 <label for="amount">Amount</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="amount"
                   value={this.state.amount}
                   onChange={this.onChangeamount}
@@ -150,34 +161,34 @@ class CreatePurchaseOrder extends Component {
                 />
               </div>
             </div>
-            <div class="form-row">
-              <div class="form-group col">
+            <div className="form-row">
+              <div className="form-group col">
                 <label for="createdon">Created On</label>
                 <input
                   type="date"
-                  class="form-control"
+                  className="form-control"
                   id="createdon"
                   value={this.state.createdon}
                   onChange={this.onChangecreatedon}
                   required
                 />
               </div>
-              <div class="form-group col-6">
+              <div className="form-group col-6">
                 <label for="description">Description</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="description"
                   value={this.state.description}
                   onChange={this.onChangedescription}
                   required
                 />
               </div>
-              <div class="form-group col">
+              <div className="form-group col">
                 <label for="prid">PR ID</label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="prid"
                   value={this.state.prid}
                   onChange={this.onChangeprid}
@@ -186,45 +197,44 @@ class CreatePurchaseOrder extends Component {
             </div>
           </form>
         </div>
+
+        {showing ? (
+          <div>
+            <hr />
+            <br />
+            <br />
+            <h2>Materials</h2>
+            <h4>Total Material Cost: LKR 23000</h4>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Requirement Id</th>
+                  <th>Material Type</th>
+                  <th>Material Name</th>
+                  <th>Quantity</th>
+                  <th>Quantity UoM</th>
+                  <th>Unit Price</th>
+                  <th>Total Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* {getMaterial.map(render_getMaterial)}  */}
+                <tr>
+                  <td>MR-001</td>
+                  <td>Cement</td>
+                  <td>Holcim Cement</td>
+                  <td>10</td>
+                  <td>10kg Packs</td>
+                  <td>2300</td>
+                  <td>23000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        ) : null}
       </div>
     );
   }
 }
 
 export default CreatePurchaseOrder;
-
-const getMaterial = () => {
-  return (
-    <div>
-      <h4>Materials</h4>
-      <h3>Total Material Cost: LKR 23000</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Requirement Id</th>
-            <th>Material Type</th>
-            <th>Date</th>
-            <th>Material Name</th>
-            <th>Quantity</th>
-            <th>Quantity UoM</th>
-            <th>Unit Price</th>
-            <th>Total Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* {getMaterial.map(render_getMaterial)}  */}
-          <tr>
-            <td>Requirement Id</td>
-            <td>Material Type</td>
-            <td>Date</td>
-            <td>Material Name</td>
-            <td>Quantity</td>
-            <td>Quantity UoM</td>
-            <td>Unit Price</td>
-            <td>Total Price</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-};
