@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class CreatePurchaseOrder extends Component {
   constructor(props) {
@@ -121,6 +122,11 @@ class CreatePurchaseOrder extends Component {
                   Cancle
                 </button>
               </div>
+              <div className="col-6 col-md-4">
+              <Link className="btn btn-dark" to="/approvedPurchaseList">
+                Back
+              </Link>
+            </div>
             </div>
             <hr />
             <div className="form-row">
