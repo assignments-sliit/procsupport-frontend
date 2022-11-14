@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const list = [
+  {
+    id: 1,
+    selected: false,
+    prid: "PR-001",
+    prName: "PipeOrder01",
+    description: "Need 10 pipes",
+    amount: "1000",
+    createdOn: "11/10/2022",
+    updatedOn: "11/10/2022",
+    status: "Approved",
+  }]
+
 const ApprovedPurchase = (props) => (
   <tr>
     <td>{props.ApprovedPurchaseList.poid}</td>
@@ -26,6 +39,9 @@ class ApprovedPurchaseList extends Component {
     this.state = {
       approvedPurchase: [],
       budget: [],
+      MasterChecked: false,
+      SelectedList: [],
+      List: list,
     };
   }
 
@@ -103,6 +119,46 @@ class ApprovedPurchaseList extends Component {
     // Navigate to Another Component
     navigate("/CreatePurchaseOrder");
   }
+  onMasterCheck(e) {
+    let tempList = this.state.List;
+    // Check/ UnCheck All Items
+    tempList.map((approver) => (approver.selected = e.target.checked));
+
+    //Update State
+    this.setState({
+      MasterChecked: e.target.checked,
+      List: tempList,
+      SelectedList: this.state.List.filter((e) => e.selected),
+    });
+  }
+
+  // Update List Item's state and Master Checkbox State
+  onItemCheck(e, item) {
+    let tempList = this.state.List;
+    tempList.map((user) => {
+      if (user.id === item.id) {
+        user.selected = e.target.checked;
+      }
+      return user;
+    });
+    //To Control Master Checkbox State
+    const totalItems = this.state.List.length;
+    const totalCheckedItems = tempList.filter((e) => e.selected).length;
+
+    // Update State
+    this.setState({
+      MasterChecked: totalItems === totalCheckedItems,
+      List: tempList,
+      SelectedList: this.state.List.filter((e) => e.selected),
+    });
+  }
+
+  // Event to get selected rows(Optional)
+  getSelectedRows() {
+    this.setState({
+      SelectedList: this.state.List.filter((e) => e.selected),
+    });
+  }
 
   render() {
     return (
@@ -128,7 +184,8 @@ class ApprovedPurchaseList extends Component {
           <table className="table">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">#</th>
+                <th></th>
+                {/* <th scope="col">#</th> */}
                 <th scope="col">PR ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
@@ -139,7 +196,7 @@ class ApprovedPurchaseList extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              {/* <tr>
                 <th scope="row">
                   <div class="form-check form-check-inline">
                     <input
@@ -157,8 +214,32 @@ class ApprovedPurchaseList extends Component {
                 <td>11/10/2022</td>
                 <td>11/10/2022</td>
                 <td>Approved</td>
-              </tr>
+              </tr> */}
               {/* {this.ApprovedPurchaseList()} */}
+
+              {this.state.List.map((purchaser) => (
+                      <tr
+                        key={purchaser.id}
+                        className={purchaser.selected ? "selected" : ""}
+                      >
+                        <th scope="row">
+                          <input
+                            type="checkbox"
+                            checked={purchaser.selected}
+                            className="form-check-input"
+                            id="rowcheck{user.id}"
+                            onChange={(e) => this.onItemCheck(e, purchaser)}
+                          />
+                        </th>
+                        <td>{purchaser.prid}</td>
+                        <td>{purchaser.prName}</td>
+                        <td>{purchaser.description}</td>
+                        <td>{purchaser.amount}</td>
+                        <td>{purchaser.createdOn}</td>
+                        <td>{purchaser.updatedOn}</td>
+                        <td>{purchaser.status}</td>
+                      </tr>
+                    ))}
             </tbody>
           </table>
         </div>

@@ -106,13 +106,13 @@ class ViewSelectedPRRecord extends Component {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>This is a lengthy description</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
+                        <td>PR-001</td>
+                        <td>Cement</td>
+                        <td>Holcim Cement</td>
+                        <td>10</td>
+                        <td>10kg Packs</td>
+                        <td>2000</td>
+                        <td>20000</td>
                       </tr>
                     </tbody>
                   </table>
@@ -120,11 +120,14 @@ class ViewSelectedPRRecord extends Component {
               </form>
 
               <br />
-              <Link to="/login" className="btn btn-md btn-success float-left">
+              <Link
+                to="/viewApproverList"
+                className="btn btn-md btn-success float-left"
+              >
                 Approve purchase request
               </Link>
 
-              <Link to="/login" className="btn btn-md btn-danger">
+              <Link to="/viewApproverList" className="btn btn-md btn-danger">
                 Reject purchase request
               </Link>
 

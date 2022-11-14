@@ -158,7 +158,7 @@ class AddNewPR extends Component {
               </form>
 
               <br />
-              <Link className="btn btn-md btn-success float-right">
+              <Link className="btn btn-md btn-success float-right" to="/viewPRList">
                 {" "}
                 Submit new purchase request
               </Link>

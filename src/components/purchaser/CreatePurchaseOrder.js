@@ -231,8 +231,8 @@ class CreatePurchaseOrder extends Component {
                   <td>Holcim Cement</td>
                   <td>10</td>
                   <td>10kg Packs</td>
-                  <td>2500</td>
-                  <td>25000</td>
+                  <td>2000</td>
+                  <td>20000</td>
                 </tr>
               </tbody>
             </table>

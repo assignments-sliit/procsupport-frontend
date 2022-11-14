@@ -87,7 +87,7 @@ class CreateNewDelivery extends Component {
               </form>
 
               <br />
-              <Link to="/login" className="btn btn-md btn-success">
+              <Link to="/viewDeliveryList" className="btn btn-md btn-success">
                 Create delivery
               </Link>
 

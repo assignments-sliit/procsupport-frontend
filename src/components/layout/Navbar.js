@@ -17,17 +17,18 @@ class Navbar extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <Link className="nav-link" to="/approvedPurchaseList">
-            Purchaser
-          </Link>
+          
           <Link className="nav-link" to="/viewPRList">
             Requestor
           </Link>
           <Link className="nav-link" to="/viewApproverList">
             Approver
           </Link>
+          <Link className="nav-link" to="/approvedPurchaseList">
+            Purchaser
+          </Link>
           <Link className="nav-link" to="/viewDeliveryList">
-            receiver
+            Receiver
           </Link>
           
 

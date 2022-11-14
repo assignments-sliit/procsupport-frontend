@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import axios from "axios";
 
 const list = [
@@ -174,24 +174,33 @@ class ReceiverListView extends Component {
                     role="group"
                     aria-label="First group"
                   >
-                    <button
+                    {/* <button
                       className="btn btn-success float-right"
                       onClick={() => this.getSelectedRows()}
                     >
                       Create Delivery
-                    </button>
+                    </button> */}
+                    <Link className="btn btn-success" to="/createDelivery">
+                      Create Delivery
+                    </Link>
                   </div>
                   <div
                     class="btn-group mr-2"
                     role="group"
                     aria-label="Second group"
                   >
-                    <button
+                    {/* <button
                       className="btn btn-primary float-right"
                       onClick={() => this.getSelectedRows()}
                     >
                       View Delivery details
-                    </button>
+                    </button> */}
+                    <Link
+                      className="btn btn-success"
+                      to="/viewSelectedDelivery"
+                    >
+                      View Delivery details
+                    </Link>
                   </div>
                 </div>
               </div>

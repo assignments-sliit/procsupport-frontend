@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import axios from "axios";
 
 const list = [
@@ -150,7 +150,7 @@ class ApproverListView extends Component {
               <br />
               <div className="table-responsive-lg">
                 <table className="table">
-                  <thead>
+                <thead className="thead-dark">
                     <tr>
                       <th></th>
                       <th scope="col">PR ID</th>
@@ -188,12 +188,15 @@ class ApproverListView extends Component {
                     ))}
                   </tbody>
                 </table>
-                <button
+                {/* <button
                   className="btn btn-primary float-right"
                   onClick={() => this.getSelectedRows()}
                 >
                   View Purchase Request details
-                </button>
+                </button> */}
+                <Link className="btn btn-success" to="/viewSelectedPRRecord">
+                View Purchase Request details
+              </Link>
                 <br />
                 <br />
               </div>
