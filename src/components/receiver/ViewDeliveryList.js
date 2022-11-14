@@ -2,102 +2,33 @@ import React, { Component } from "react";
 //import { Link } from "react-router-dom";
 //import axios from "axios";
 
-const list = [
-  {
-    id: 1,
-    selected: false,
-    prid: "PR001",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 2,
-    selected: false,
-    prid: "PR001",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    selected: false,
-    prid: "PR001",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 4,
-    selected: false,
-    prid: "PR001",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 5,
-    selected: false,
-    prid: "PR001",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-];
-
-/*const pr = (props) => {
-  <tr>
-    <td>{props.pr.prid}</td>
-    <td>{props.pr.prName}</td>
-    <td>{props.pr.description}</td>
-    <td>{props.pr.amount}</td>
-    <td>{props.pr.createdOn}</td>
-    <td>{props.pr.updatedOn}</td>
-    <td>{props.pr.status}</td>
-  </tr>;
-};*/
-
 class ReceiverListView extends Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props);
     this.state = {
-      List: list,
+      List: [],
       MasterChecked: false,
       SelectedList: [],
+      prs: [],
     };
-  }
+  }*/
 
   // Select/ UnSelect Table rows
-  onMasterCheck(e) {
+  /*onMasterCheck(e) {
     let tempList = this.state.List;
     // Check/ UnCheck All Items
-    tempList.map((receiver) => (receiver.selected = e.target.checked));
+    tempList.map((receiver) => (receiver.selected = e.target.checked));*/
 
-    //Update State
-    this.setState({
+  //Update State
+  /*this.setState({
       MasterChecked: e.target.checked,
       List: tempList,
       SelectedList: this.state.List.filter((e) => e.selected),
     });
-  }
+  }*/
 
   // Update List Item's state and Master Checkbox State
-  onItemCheck(e, item) {
+  /*onItemCheck(e, item) {
     let tempList = this.state.List;
     tempList.map((user) => {
       if (user.id === item.id) {
@@ -116,36 +47,27 @@ class ReceiverListView extends Component {
       List: tempList,
       SelectedList: this.state.List.filter((e) => e.selected),
     });
-  }
+  }*/
 
   // Event to get selected rows(Optional)
-  getSelectedRows() {
+  /*getSelectedRows() {
     this.setState({
       SelectedList: this.state.List.filter((e) => e.selected),
     });
   }
 
-  /*constructor(props){
-    super(props);
-    this.state = {
-      prs:[],
-    }
-  }
   componentDidMount() {
-    axios.get('http://localhost:500/api/users/<link>')
-    .then(response => {
-      this.setState({
-        prs: response.data
+    axios
+      .get("http://localhost:5000/api/delivery/all/started/")
+      .then((response) => {
+        this.setState({
+          List: response.data.purchase_requests,
+        });
       })
-    }).catch(function (error){
-      console.log(error);
-    })
-  }
-  prList(){
-    return this.state.courses.map(function (currentPRs,i) {
-        return <PR pr={currentPRs} key={i}/>
-    });
-}*/
+      .catch(function (error) {
+        console.log(error);
+      });
+  }*/
 
   render() {
     return (
@@ -162,7 +84,6 @@ class ReceiverListView extends Component {
                     <tr>
                       <th></th>
                       <th scope="col">PO ID</th>
-                      <th scope="col">PO Name</th>
                       <th scope="col">Supplier</th>
                       <th scope="col">Address</th>
                       <th scope="col">Amount</th>
@@ -170,40 +91,16 @@ class ReceiverListView extends Component {
                       <th scope="col">Delivery Status</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {this.state.List.map((receiver) => (
-                      <tr
-                        key={receiver.id}
-                        className={receiver.selected ? "selected" : ""}
-                      >
-                        <th scope="row">
-                          <input
-                            type="checkbox"
-                            checked={receiver.selected}
-                            className="form-check-input"
-                            id="rowcheck{user.id}"
-                            onChange={(e) => this.onItemCheck(e, receiver)}
-                          />
-                        </th>
-                        <td>{receiver.prid}</td>
-                        <td>{receiver.prName}</td>
-                        <td>{receiver.description}</td>
-                        <td>{receiver.amount}</td>
-                        <td>{receiver.createdOn}</td>
-                        <td>{receiver.updatedOn}</td>
-                        <td>{receiver.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
+                  <tbody></tbody>
                 </table>
 
                 <div
-                  class="btn-toolbar float-right"
+                  className="btn-toolbar float-right"
                   role="toolbar"
                   aria-label="Toolbar with button groups"
                 >
                   <div
-                    class="btn-group mr-2"
+                    className="btn-group mr-2"
                     role="group"
                     aria-label="First group"
                   >
