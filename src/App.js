@@ -61,7 +61,7 @@ class App extends Component {
             <Routes>
               <Route
                 exact
-                path="/viewSelectedPRRecord"
+                path="/viewSelectedPRRecord/:id"
                 element={<ViewSelectedPRRecord />}
               />
             </Routes>

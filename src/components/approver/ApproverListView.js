@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import axios from "axios";
 
 const list = [
@@ -17,7 +17,7 @@ const list = [
   {
     id: 2,
     selected: false,
-    prid: "PR001",
+    prid: "PR002",
     prName: "Ervin Howell",
     description: "Shanna@melissa.tv",
     amount: "010-692-6593 x09125",
@@ -28,7 +28,7 @@ const list = [
   {
     id: 3,
     selected: false,
-    prid: "PR001",
+    prid: "PR003",
     prName: "Ervin Howell",
     description: "Shanna@melissa.tv",
     amount: "010-692-6593 x09125",
@@ -39,7 +39,7 @@ const list = [
   {
     id: 4,
     selected: false,
-    prid: "PR001",
+    prid: "PR004",
     prName: "Ervin Howell",
     description: "Shanna@melissa.tv",
     amount: "010-692-6593 x09125",
@@ -50,7 +50,7 @@ const list = [
   {
     id: 5,
     selected: false,
-    prid: "PR001",
+    prid: "PR005",
     prName: "Ervin Howell",
     description: "Shanna@melissa.tv",
     amount: "010-692-6593 x09125",
@@ -119,11 +119,12 @@ class ApproverListView extends Component {
   }
 
   // Event to get selected rows(Optional)
-  getSelectedRows() {
-    this.setState({
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
-  }
+  // getSelectedRows() {
+  //   console.log('----------', this.state.List)
+  //   this.setState({
+  //     SelectedList: this.state.List.filter((e) => e.selected),
+  //   });
+  // }
 
   /*constructor(props){
     super(props);
@@ -199,12 +200,16 @@ class ApproverListView extends Component {
                     ))}
                   </tbody>
                 </table>
+                <Link
+                  to={`/viewSelectedPRRecord/${this.state.List.filter((e) => e.selected)[0]?.prid}`}
+                >
                 <button
                   className="btn btn-primary float-right"
-                  onClick={() => this.getSelectedRows()}
+                  //onClick={() => this.getSelectedRows()}
                 >
                   View Purchase Request details
                 </button>
+                </Link>
                 <br />
                 <br />
               </div>
