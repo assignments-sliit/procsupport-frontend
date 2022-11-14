@@ -51,7 +51,7 @@ class PRListView extends Component {
               <br />
               <div className="table-responsive-lg">
                 <table className="table">
-                  <thead>
+                  <thead className="thead-dark">
                     <tr>
                       <th scope="col">PR ID</th>
                       <th scope="col">PR Name</th>
@@ -64,22 +64,31 @@ class PRListView extends Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>This is a lengthy description</td>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td>@fat</td>
+                      <td>PR-001</td>
+                      <td>PipeOrder01</td>
+                      <td>Need 10 pipes</td>
+                      <td>1000</td>
+                      <td>11/10/2022</td>
+                      <td>11/10/2022</td>
+                      <td>Approved</td>
                     </tr>
                     <tr>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td>@fat</td>
+                      <td>PR-002</td>
+                      <td>SandOrder01</td>
+                      <td>20kg sand</td>
+                      <td>20000</td>
+                      <td>11/10/2022</td>
+                      <td>11/10/2022</td>
+                      <td>Pending</td>
+                    </tr>
+                    <tr>
+                      <td>PR-003</td>
+                      <td>CementOrder01</td>
+                      <td>10kg sand</td>
+                      <td>20000</td>
+                      <td>11/09/2022</td>
+                      <td>11/09/2022</td>
+                      <td>Declined</td>
                     </tr>
                   </tbody>
                 </table>

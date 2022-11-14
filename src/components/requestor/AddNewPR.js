@@ -24,7 +24,7 @@ class AddNewPR extends Component {
                       type="text"
                       className="form-control"
                       id="prid"
-                      readOnly
+                      // readOnly
                     />
                   </div>
                   <div className="form-group col-md-9">
@@ -77,7 +77,7 @@ class AddNewPR extends Component {
                         type="text"
                         className="form-control"
                         id="prName"
-                        readOnly
+                        // readOnly
                       />
                     </div>
                   </div>
@@ -101,19 +101,23 @@ class AddNewPR extends Component {
                             type="text"
                             className="form-control"
                             id="reqId"
-                            readOnly
+                            // readOnly
                           />
                         </td>
                         <td>
                           <select id="materialType" class="form-control">
-                            <option>Choose...</option>
-                            <option selected> New </option>
+                            <option selected>Choose...</option>
+                            <option > Cement </option>
+                            <option > Sand </option>
+                            <option > Pipes </option>
                           </select>
                         </td>
                         <td>
                           <select id="materialName" class="form-control">
-                            <option>Choose...</option>
-                            <option selected> New </option>
+                            <option selected>Choose...</option>
+                            <option > Holcim Cement </option>
+                            <option > DSI Pipe </option>
+                            <option > Kientic Sand</option>
                           </select>
                         </td>
                         <td>
@@ -125,8 +129,11 @@ class AddNewPR extends Component {
                         </td>
                         <td>
                           <select id="quantityUOM" class="form-control">
-                            <option>Choose...</option>
-                            <option selected> New </option>
+                            <option selected>Choose...</option>
+                            <option > 1kg Packs </option>
+                            <option > 20kg Packs </option>
+                            <option > 50kg Packs </option>
+                            <option > 100kg Packs </option>
                           </select>
                         </td>
                         <td>
@@ -134,7 +141,7 @@ class AddNewPR extends Component {
                             type="text"
                             className="form-control"
                             id="unitPrice"
-                            readOnly
+                            // readOnly
                           />
                         </td>
                         <td>

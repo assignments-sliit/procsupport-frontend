@@ -20,6 +20,16 @@ class Navbar extends Component {
           <Link className="nav-link" to="/approvedPurchaseList">
             Purchaser
           </Link>
+          <Link className="nav-link" to="/viewPRList">
+            Requestor
+          </Link>
+          <Link className="nav-link" to="/viewApproverList">
+            Approver
+          </Link>
+          <Link className="nav-link" to="/viewDeliveryList">
+            receiver
+          </Link>
+          
 
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav ml-auto">

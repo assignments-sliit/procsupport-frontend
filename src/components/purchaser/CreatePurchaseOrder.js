@@ -226,13 +226,13 @@ class CreatePurchaseOrder extends Component {
               <tbody>
                 {/* {getMaterial.map(render_getMaterial)}  */}
                 <tr>
-                  <td>MR-001</td>
+                  <td>PR-001</td>
                   <td>Cement</td>
                   <td>Holcim Cement</td>
                   <td>10</td>
                   <td>10kg Packs</td>
-                  <td>2300</td>
-                  <td>23000</td>
+                  <td>2500</td>
+                  <td>25000</td>
                 </tr>
               </tbody>
             </table>

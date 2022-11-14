@@ -37,7 +37,7 @@ class ApprovedPurchaseList extends Component {
           ApprovedPurchase: response.data,
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -50,7 +50,7 @@ class ApprovedPurchaseList extends Component {
           Budget: response.data,
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -77,7 +77,7 @@ class ApprovedPurchaseList extends Component {
   }
 
   ApprovedPurchaseList() {
-    return this.state.approvedPurchase.map(function(
+    return this.state.approvedPurchase.map(function (
       currentApprovedPurchase,
       i
     ) {
@@ -88,7 +88,7 @@ class ApprovedPurchaseList extends Component {
   }
 
   ViewBudget() {
-    return this.state.budget.map(function(currentBudget, i) {
+    return this.state.budget.map(function (currentBudget, i) {
       return <Budget budget={currentBudget} key={i} />;
     });
   }
@@ -139,7 +139,7 @@ class ApprovedPurchaseList extends Component {
               </tr>
             </thead>
             <tbody>
-              {/* <tr>
+              <tr>
                 <th scope="row">
                   <div class="form-check form-check-inline">
                     <input
@@ -151,14 +151,14 @@ class ApprovedPurchaseList extends Component {
                   </div>
                 </th>
                 <td>PR-001</td>
-                <td>PR Name</td>
-                <td>Blah blah</td>
-                <td>LKR 4,000</td>
-                <td>08/11/2022</td>
-                <td>08/11/2022</td>
+                <td>PipeOrder01</td>
+                <td>Need 10 pipes</td>
+                <td>1000</td>
+                <td>11/10/2022</td>
+                <td>11/10/2022</td>
                 <td>Approved</td>
-              </tr> */}
-              {this.ApprovedPurchaseList()}
+              </tr>
+              {/* {this.ApprovedPurchaseList()} */}
             </tbody>
           </table>
         </div>
