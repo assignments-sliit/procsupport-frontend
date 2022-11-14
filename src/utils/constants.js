@@ -1,0 +1,6 @@
+export const userTypes = {
+    REQUESTOR: "REQUESTOR",
+    APPROVER: "APPROVER",
+    PURCHASER: "PURCHASER",
+    RECEIVER: "RECEIVER"
+}
