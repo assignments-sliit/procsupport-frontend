@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const list = [
-  {
-    id: 1,
-    selected: false,
-    prid: "PR-001",
-    prName: "PipeOrder01",
-    description: "Need 10 pipes",
-    amount: "1000",
-    createdOn: "11/10/2022",
-    updatedOn: "11/10/2022",
-    status: "Approved",
-  }]
+// const list = [
+//   {
+//     id: 1,
+//     selected: false,
+//     prid: "PR-001",
+//     prName: "PipeOrder01",
+//     description: "Need 10 pipes",
+//     amount: "1000",
+//     createdOn: "11/10/2022",
+//     updatedOn: "11/10/2022",
+//     status: "Approved",
+//   }]
 
 const ApprovedPurchase = (props) => (
   <tr>
@@ -35,28 +35,64 @@ const Budget = (props) => (
 class ApprovedPurchaseList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       approvedPurchase: [],
       budget: [],
       MasterChecked: false,
       SelectedList: [],
-      List: list,
+      List: []
     };
   }
 
-  getApprovedPurchase() {
-    axios
-      .get("http://localhost:5000/api/po/get/approved")
-      .then((response) => {
-        this.setState({
-          ApprovedPurchase: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+   // Select/ UnSelect Table rows
+   onMasterCheck(e) {
+    let tempList = this.state.List;
+    // Check/ UnCheck All Items
+    tempList.map((approver) => (approver.selected = e.target.checked));
+
+    //Update State
+    this.setState({
+      MasterChecked: e.target.checked,
+      List: tempList,
+      SelectedList: this.state.List.filter((e) => e.selected),
+    });
   }
+
+  // Update List Item's state and Master Checkbox State
+  onItemCheck(e, item) {
+    let tempList = this.state.List;
+    tempList.map((user) => {
+      console.log('-------------', user, item)
+      if (user._id === item._id) {
+        user.selected = e.target.checked;
+      }
+      return user;
+    });
+
+    //To Control Master Checkbox State
+    const totalItems = this.state.List.length;
+    const totalCheckedItems = tempList.filter((e) => e.selected).length;
+
+    // Update State
+    this.setState({
+      MasterChecked: totalItems === totalCheckedItems,
+      List: tempList,
+      SelectedList: this.state.List.filter((e) => e.selected),
+    });
+  }
+
+  // getApprovedPurchase() {
+  //   axios
+  //     .get("http://localhost:5000/api/po/get/approved")
+  //     .then((response) => {
+  //       this.setState({
+  //         ApprovedPurchase: response.dataapproved_purchase
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
   getBudget() {
     axios
@@ -72,8 +108,21 @@ class ApprovedPurchaseList extends Component {
   }
 
   componentDidMount() {
-    this.ApprovedPurchaseList();
-    this.ViewBudget();
+    // this.ApprovedPurchaseList();
+    // this.ViewBudget();
+    axios.get('http://localhost:5000/api/po/get/approved')
+    .then(response => {
+      this.setState({
+        List: response.data.purchase_requests
+      })
+    }).catch(function (error){
+      console.log(error);
+    })
+  }
+  prList(){
+    return this.state.courses.map(function (currentPRs,i) {
+        return <ApprovedPurchase pr={currentPRs} key={i}/>
+    });
 
     // axios.get("http://localhost:5000/api/po/get/approved").then((response) => {
     //   this.setState({
@@ -92,17 +141,11 @@ class ApprovedPurchaseList extends Component {
     //   });
   }
 
-  ApprovedPurchaseList() {
-    return this.state.approvedPurchase.map(function (
-      currentApprovedPurchase,
-      i
-    ) {
-      return (
-        <ApprovedPurchase approvedPurchase={currentApprovedPurchase} key={i} />
-      );
+  approvedPurchase(){
+    return this.state.courses.map(function (currentPRs,i) {
+        return <ApprovedPurchase pr={currentPRs} key={i}/>
     });
-  }
-
+}
   ViewBudget() {
     return this.state.budget.map(function (currentBudget, i) {
       return <Budget budget={currentBudget} key={i} />;
@@ -118,46 +161,6 @@ class ApprovedPurchaseList extends Component {
     const { navigate } = this.props;
     // Navigate to Another Component
     navigate("/CreatePurchaseOrder");
-  }
-  onMasterCheck(e) {
-    let tempList = this.state.List;
-    // Check/ UnCheck All Items
-    tempList.map((approver) => (approver.selected = e.target.checked));
-
-    //Update State
-    this.setState({
-      MasterChecked: e.target.checked,
-      List: tempList,
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
-  }
-
-  // Update List Item's state and Master Checkbox State
-  onItemCheck(e, item) {
-    let tempList = this.state.List;
-    tempList.map((user) => {
-      if (user.id === item.id) {
-        user.selected = e.target.checked;
-      }
-      return user;
-    });
-    //To Control Master Checkbox State
-    const totalItems = this.state.List.length;
-    const totalCheckedItems = tempList.filter((e) => e.selected).length;
-
-    // Update State
-    this.setState({
-      MasterChecked: totalItems === totalCheckedItems,
-      List: tempList,
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
-  }
-
-  // Event to get selected rows(Optional)
-  getSelectedRows() {
-    this.setState({
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
   }
 
   render() {
@@ -175,7 +178,7 @@ class ApprovedPurchaseList extends Component {
           <hr />
           <div className="row">
             <div className="col-6 col-md-2">
-              <Link className="btn btn-success" to="/createPurchaseOrder">
+              <Link className="btn btn-success" to={"/createPurchaseOrder/${this.state.List.filter((e) => e.selected)[0]}"}>
                 Create Purchse Order
               </Link>
             </div>

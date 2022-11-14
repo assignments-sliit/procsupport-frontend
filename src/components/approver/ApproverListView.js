@@ -1,55 +1,66 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import axios from "axios";
+import axios from "axios";
 
-const list = [
-  {
-    id: 1,
-    selected: false,
-    prid: "PR-001",
-    prName: "PipeOrder01",
-    description: "Need 10 pipes",
-    amount: "1000",
-    createdOn: "11/10/2022",
-    updatedOn: "11/10/2022",
-    status: "Approved",
-  },
-  {
-    id: 2,
-    selected: false,
-    prid: "PR-002",
-    prName: "SandOrder01",
-    description: "20kg sand",
-    amount: "20000",
-    createdOn: "11/10/2022",
-    updatedOn: "11/10/2022",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    selected: false,
-    prid: "PR-003",
-    prName: "CementOrder01",
-    description: "10kg sand",
-    amount: "20000",
-    createdOn: "11/09/2022",
-    updatedOn: "11/09/2022",
-    status: "Declined",
-  },
-  // {
-  //   id: 4,
-  //   selected: false,
-  //   prid: "PR001",
-  //   prName: "Ervin Howell",
-  //   description: "Shanna@melissa.tv",
-  //   amount: "010-692-6593 x09125",
-  //   createdOn: "anastasia.net",
-  //   updatedOn: "anastasia.net",
-  //   status: "Pending",
-  // },
-];
+// const list = [
+//   {
+//     id: 1,
+//     selected: false,
+//     prid: "PR001",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 2,
+//     selected: false,
+//     prid: "PR002",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 3,
+//     selected: false,
+//     prid: "PR003",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 4,
+//     selected: false,
+//     prid: "PR004",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 5,
+//     selected: false,
+//     prid: "PR005",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+// ];
 
-/*const pr = (props) => {
+const PR = (props) => {
   <tr>
     <td>{props.pr.prid}</td>
     <td>{props.pr.prName}</td>
@@ -59,15 +70,16 @@ const list = [
     <td>{props.pr.updatedOn}</td>
     <td>{props.pr.status}</td>
   </tr>;
-};*/
+};
 
 class ApproverListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      List: list,
+      List: [],
       MasterChecked: false,
       SelectedList: [],
+      prs: []
     };
   }
 
@@ -89,7 +101,8 @@ class ApproverListView extends Component {
   onItemCheck(e, item) {
     let tempList = this.state.List;
     tempList.map((user) => {
-      if (user.id === item.id) {
+      console.log('-------------', user, item)
+      if (user._id === item._id) {
         user.selected = e.target.checked;
       }
       return user;
@@ -108,23 +121,18 @@ class ApproverListView extends Component {
   }
 
   // Event to get selected rows(Optional)
-  getSelectedRows() {
-    this.setState({
-      SelectedList: this.state.List.filter((e) => e.selected),
-    });
-  }
+  // getSelectedRows() {
+  //   console.log('----------', this.state.List)
+  //   this.setState({
+  //     SelectedList: this.state.List.filter((e) => e.selected),
+  //   });
+  // }
 
-  /*constructor(props){
-    super(props);
-    this.state = {
-      prs:[],
-    }
-  }
   componentDidMount() {
-    axios.get('http://localhost:500/api/users/<link>')
+    axios.get('http://localhost:5000/api/pr/get/all')
     .then(response => {
       this.setState({
-        prs: response.data
+        List: response.data.purchase_requests
       })
     }).catch(function (error){
       console.log(error);
@@ -134,7 +142,7 @@ class ApproverListView extends Component {
     return this.state.courses.map(function (currentPRs,i) {
         return <PR pr={currentPRs} key={i}/>
     });
-}*/
+}
 
   render() {
     return (
@@ -150,7 +158,7 @@ class ApproverListView extends Component {
               <br />
               <div className="table-responsive-lg">
                 <table className="table">
-                <thead className="thead-dark">
+                  <thead>
                     <tr>
                       <th></th>
                       <th scope="col">PR ID</th>
@@ -188,15 +196,15 @@ class ApproverListView extends Component {
                     ))}
                   </tbody>
                 </table>
-                {/* <button
+                <Link
+                  to={`/viewSelectedPRRecord/${this.state.List.filter((e) => e.selected)[0]?.prid}`}
+                >
+                <button
                   className="btn btn-primary float-right"
-                  onClick={() => this.getSelectedRows()}
                 >
                   View Purchase Request details
-                </button> */}
-                <Link className="btn btn-success" to="/viewSelectedPRRecord">
-                View Purchase Request details
-              </Link>
+                </button>
+                </Link>
                 <br />
                 <br />
               </div>

@@ -18,7 +18,7 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon" />
           </button>
           
-          <Link className="nav-link" to="/viewPRList">
+          {/* <Link className="nav-link" to="/viewPRList">
             Requestor
           </Link>
           <Link className="nav-link" to="/viewApproverList">
@@ -29,7 +29,7 @@ class Navbar extends Component {
           </Link>
           <Link className="nav-link" to="/viewDeliveryList">
             Receiver
-          </Link>
+          </Link> */}
           
 
           <div className="collapse navbar-collapse" id="mobile-nav">
