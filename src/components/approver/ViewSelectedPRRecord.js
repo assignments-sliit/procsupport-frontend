@@ -8,6 +8,11 @@ import axios from "axios";
 class ViewSelectedPRRecord extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      pr: null,
+    };
+
+    this.approvePR = this.approvePR.bind(this);
   }
 
   componentDidMount() {
@@ -15,15 +20,29 @@ class ViewSelectedPRRecord extends Component {
   }
 
   async getPRRecord(priId) {
-    const response = await axios.get(`http://localhost:5000/api/pr/get/auth/pr/${priId}`, 		{
-			headers: {
-				"authorization": `Bearer ${localStorage.getItem("token")}`
-			}
-		});
+    const response = await axios.get(
+      `http://localhost:5000/api/pr/get/pr/${priId}`
+    );
 
-    if(response.status === 200) {
-      console.log(response.data)
+    if (response.status === 200) {
+      this.setState({
+        pr: response.data.purchase_request,
+      });
     }
+  }
+
+  approvePR() {
+    axios
+      .put("http://localhost:5000/api/pr/status/approve", {
+        token: localStorage.getItem("token"),
+        prid: this.state.pr?.prid,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          this.props.navigate("/viewApproverList");
+        }
+      })
+      .catch((error) => {});
   }
 
   render() {
@@ -46,6 +65,7 @@ class ViewSelectedPRRecord extends Component {
                       className="form-control"
                       id="prid"
                       readOnly
+                      value={this.state.pr?.prid}
                     />
                   </div>
                   <div className="form-group col-md-9">
@@ -55,6 +75,7 @@ class ViewSelectedPRRecord extends Component {
                       className="form-control"
                       id="prName"
                       readOnly
+                      value={this.state.pr?.prName}
                     />
                   </div>
                 </div>
@@ -65,6 +86,7 @@ class ViewSelectedPRRecord extends Component {
                     className="form-control"
                     id="description"
                     readOnly
+                    value={this.state.pr?.description}
                   />
                 </div>
                 <div className="form-row">
@@ -75,6 +97,7 @@ class ViewSelectedPRRecord extends Component {
                       className="form-control"
                       id="createdOn"
                       readOnly
+                      value={this.state.pr?.createdOn}
                     />
                   </div>
                   <div className="form-group col-md-4">
@@ -84,6 +107,7 @@ class ViewSelectedPRRecord extends Component {
                       className="form-control"
                       id="status"
                       readOnly
+                      value={this.state.pr?.status}
                     />
                   </div>
                   <div className="form-group col-md-4">
@@ -93,6 +117,7 @@ class ViewSelectedPRRecord extends Component {
                       className="form-control"
                       id="amount"
                       readOnly
+                      value={this.state.pr?.amount}
                     />
                   </div>
                 </div>
@@ -110,6 +135,7 @@ class ViewSelectedPRRecord extends Component {
                         className="form-control"
                         id="prName"
                         readOnly
+                        value={this.state.pr?.prName}
                       />
                     </div>
                   </div>
@@ -141,13 +167,20 @@ class ViewSelectedPRRecord extends Component {
               </form>
 
               <br />
-              <Link to="/login" className="btn btn-md btn-success float-left">
-                Approve purchase request
-              </Link>
+              {this.state.pr?.status === "NEW" && (
+                <>
+                  <button
+                    onClick={this.approvePR}
+                    className="btn btn-md btn-success float-left"
+                  >
+                    Approve purchase request
+                  </button>
 
-              <Link to="/login" className="btn btn-md btn-danger">
-                Reject purchase request
-              </Link>
+                  <button className="btn btn-md btn-danger">
+                    Reject purchase request
+                  </button>
+                </>
+              )}
 
               <Link
                 to="/viewApproverList"

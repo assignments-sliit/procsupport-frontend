@@ -112,7 +112,7 @@ class ReceiverListView extends Component {
                     </button>
                   </div>
                   <div
-                    class="btn-group mr-2"
+                    className="btn-group mr-2"
                     role="group"
                     aria-label="Second group"
                   >

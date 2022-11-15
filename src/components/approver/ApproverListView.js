@@ -1,66 +1,66 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import axios from "axios";
+import axios from "axios";
 
-const list = [
-  {
-    id: 1,
-    selected: false,
-    prid: "PR001",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 2,
-    selected: false,
-    prid: "PR002",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    selected: false,
-    prid: "PR003",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 4,
-    selected: false,
-    prid: "PR004",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-  {
-    id: 5,
-    selected: false,
-    prid: "PR005",
-    prName: "Ervin Howell",
-    description: "Shanna@melissa.tv",
-    amount: "010-692-6593 x09125",
-    createdOn: "anastasia.net",
-    updatedOn: "anastasia.net",
-    status: "Pending",
-  },
-];
+// const list = [
+//   {
+//     id: 1,
+//     selected: false,
+//     prid: "PR001",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 2,
+//     selected: false,
+//     prid: "PR002",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 3,
+//     selected: false,
+//     prid: "PR003",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 4,
+//     selected: false,
+//     prid: "PR004",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+//   {
+//     id: 5,
+//     selected: false,
+//     prid: "PR005",
+//     prName: "Ervin Howell",
+//     description: "Shanna@melissa.tv",
+//     amount: "010-692-6593 x09125",
+//     createdOn: "anastasia.net",
+//     updatedOn: "anastasia.net",
+//     status: "Pending",
+//   },
+// ];
 
-/*const pr = (props) => {
+const PR = (props) => {
   <tr>
     <td>{props.pr.prid}</td>
     <td>{props.pr.prName}</td>
@@ -70,15 +70,16 @@ const list = [
     <td>{props.pr.updatedOn}</td>
     <td>{props.pr.status}</td>
   </tr>;
-};*/
+};
 
 class ApproverListView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      List: list,
+      List: [],
       MasterChecked: false,
       SelectedList: [],
+      prs: [],
     };
   }
 
@@ -100,7 +101,8 @@ class ApproverListView extends Component {
   onItemCheck(e, item) {
     let tempList = this.state.List;
     tempList.map((user) => {
-      if (user.id === item.id) {
+      console.log("-------------", user, item);
+      if (user._id === item._id) {
         user.selected = e.target.checked;
       }
       return user;
@@ -126,27 +128,23 @@ class ApproverListView extends Component {
   //   });
   // }
 
-  /*constructor(props){
-    super(props);
-    this.state = {
-      prs:[],
-    }
-  }
   componentDidMount() {
-    axios.get('http://localhost:500/api/users/<link>')
-    .then(response => {
-      this.setState({
-        prs: response.data
+    axios
+      .get("http://localhost:5000/api/pr/get/all")
+      .then((response) => {
+        this.setState({
+          List: response.data.purchase_requests,
+        });
       })
-    }).catch(function (error){
-      console.log(error);
-    })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  prList(){
-    return this.state.courses.map(function (currentPRs,i) {
-        return <PR pr={currentPRs} key={i}/>
+  prList() {
+    return this.state.courses.map(function (currentPRs, i) {
+      return <PR pr={currentPRs} key={i} />;
     });
-}*/
+  }
 
   render() {
     return (
@@ -201,14 +199,13 @@ class ApproverListView extends Component {
                   </tbody>
                 </table>
                 <Link
-                  to={`/viewSelectedPRRecord/${this.state.List.filter((e) => e.selected)[0]?.prid}`}
+                  to={`/viewSelectedPRRecord/${
+                    this.state.List.filter((e) => e.selected)[0]?.prid
+                  }`}
                 >
-                <button
-                  className="btn btn-primary float-right"
-                  //onClick={() => this.getSelectedRows()}
-                >
-                  View Purchase Request details
-                </button>
+                  <button className="btn btn-primary float-right">
+                    View Purchase Request details
+                  </button>
                 </Link>
                 <br />
                 <br />
